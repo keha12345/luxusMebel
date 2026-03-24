@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'lux-gold': '#D4AF37', 
+                        'lux-dark': '#0D0D0D',
+                        'lux-silver': '#8C8C8C',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Прячем скроллбар, сохраняя функционал */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE и Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+
+</head>
+<body class="bg-lux-dark text-white font-serif w-full overflow-x-hidden">
+
+    <header class="w-full fixed top-0 z-50 border-b border-lux-silver/10" style="background-image: linear-gradient(rgba(13, 13, 13, 0.6), rgba(13, 13, 13, 0.6)), url('{{navigation.background}}'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-6 flex items-center justify-between h-20 md:h-14"> 
+            
+            <a href="/" class="flex items-center">
+                <img src="{{brand.logoUrl}}" alt="Logo" class="h-12 w-24" style="filter: brightness(1.8) contrast(1.1);">
+            </a>
+
+            <nav class="flex flex-wrap justify-between text-[11px] leading-7 w-48 md:w-96 tracking-[0.3em] uppercase font-mono">
+                {{navigation.menuHtml}}
+            </nav>
+
+            <!-- <div class="flex items-center space-x-8">
+                <a href="tel:{{contacts.phone}}" class="font-mono text-[10px] text-lux-silver">
+                    {{contacts.phoneFormatted}}
+                </a>
+                <button class="hidden lg:block font-mono text-[9px] px-4 py-1.5 border border-lux-gold/40 text-lux-gold uppercase tracking-widest">
+                    {{navigation.partnership.label}}
+                </button>
+            </div> -->
+        </div>
+    </header>
+
+    <main class="relative min-h-screen w-full flex items-center justify-center bg-white">
+        <div class="absolute inset-0 z-0">
+            <img src="{{hero.image}}" alt="Background" class="w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-6 z-10">
+            <div class="max-w-4xl border-l-2 border-lux-dark pl-8 md:pl-16 py-10">
+                <p class="font-mono text-[10px] md:text-xs uppercase tracking-[0.5em] text-lux-dark/60 mb-6">
+                    {{brand.name}} / Инженерный аудит
+                </p>
+                
+                <h2 class="text-5xl md:text-8xl text-lux-dark leading-[1.1] mb-8 tracking-tight">
+                    {{hero.title}}
+                </h2>
+
+                <p class="text-lux-dark font-mono text-xs md:text-sm leading-relaxed max-w-xl mb-12 opacity-80">
+                    {{hero.description}}
+                </p>
+
+                <div class="flex items-center space-x-6">
+                    <a href="#projects" class="group relative inline-block px-8 py-4 bg-lux-dark text-white font-mono text-[10px] uppercase tracking-widest overflow-hidden transition-all">
+                        <span class="relative z-10">{{hero.cta}}</span>
+                        <div class="absolute inset-0 bg-lux-gold translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                    </a>
+                    
+                    <div class="hidden md:flex items-center space-x-4 font-mono text-[9px] text-lux-dark/40 uppercase tracking-tighter">
+                        <span class="w-12 h-px bg-lux-dark/20"></span>
+                        <span>Scroll to explore</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-lux-dark to-transparent z-20"></div>
+    </main>
+    <section id="partners" class="py-24 pb-8 bg-lux-dark overflow-hidden">
+        <!-- <div class="container mx-auto px-24 mb-10 text-center md:text-left">
+            <p class="font-mono text-[14px] uppercase tracking-[0.4em] text-lux-silver">
+                {{partners.title}}
+            </p>
+        </div> -->
+        <div class="container mx-auto px-6">
+            <div class="mb-16 border-l border-lux-gold pl-8 md:pl-14">
+                <h2 class="text-2xl md:text-4xl font-serif text-white uppercase tracking-tighter">{{partners.title}}</h2>
+            </div>
+        </div>
+
+        <div class="flex whitespace-nowrap overflow-hidden" 
+            onmouseover="this.firstElementChild.style.animationPlayState='paused'" 
+            onmouseout="this.firstElementChild.style.animationPlayState='running'">
+            
+            <div style="display: inline-block; white-space: nowrap; animation: marquee 90s linear infinite;">
+                <div class="inline-flex items-center">
+                    {{partners.listHtml}}
+                    {{partners.listHtml}}
+                    {{partners.listHtml}} 
+                    {{partners.listHtml}}
+                    {{partners.listHtml}}
+                    {{partners.listHtml}}
+                    {{partners.listHtml}} 
+                </div>
+            </div>
+        </div>
+        <div class="mx-auto mt-11 w-full md:w-1/2 p-4 md:p-6 z-10" data-aos="fade-top" data-aos-delay="100" >
+            <div class="bg-white/[0.05] border border-white/10 p-6 rounded-2xl backdrop-blur-md 
+                        transition-all duration-700 hover:bg-white/[0.08] hover:border-lux-gold/30 
+                        ">
+
+                <p class="text-lux-silver font-mono text-[14px] md:text-[16px] leading-relaxed opacity-80 group-hover:opacity-100 ${!isEven ? 'md:text-right' : ''}">
+                    {{partners.replic}}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+    <section id="projects" class="py-24 pb-8 bg-lux-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="mb-16 border-l border-lux-gold pl-8 md:pl-14">
+                <h2 class="text-2xl md:text-4xl font-serif text-white uppercase tracking-tighter">{{projects.title}}</h2>
+                <p class="font-mono text-[9px] uppercase tracking-[0.5em] text-lux-silver mt-2">The Detail of Perfection</p>
+            </div>
+
+            <div class="relative max-h-[850px] overflow-y-hidden">
+                <div class="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-2">
+                    {{projects.gridHtml}}
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-lux-dark to-transparent z-20">
+                    <div onclick="(()=>{this.parentNode.parentNode.classList.remove('max-h-[850px]'); this.parentNode.classList.add('hidden')})()" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 cursor-pointer text-white/90 hover:text-white font-mono text-[12px]">SHOW_MORE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="form" class="py-24 pb-8 bg-lux-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="mb-16 border-l border-lux-gold pl-8 md:pl-14">
+                <h2 class="text-2xl md:text-4xl font-serif text-white uppercase tracking-tighter">{{submit.title}}</h2>
+                <p class="font-mono text-[9px] uppercase tracking-[0.5em] text-lux-silver mt-2">{{submit.sub}}</p>
+            </div>
+            <div class="mt-24 bg-white p-8 md:p-10 text-lux-dark max-w-5xl mx-auto ">
+               
+                <div class="space-y-6">
+                    <input data-name type="text" placeholder="NAME" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest">
+                    
+                    <input data-tel type="tel" placeholder="PHONE" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest">
+                    
+                    <textarea data-text placeholder="COMMENT / PROJECT DETAILS" rows="3" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest resize-none"></textarea>
+                    
+                    <button onclick="submit()" class="w-full bg-lux-dark text-white py-5 mt-4 font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-lux-gold transition-all duration-500 shadow-lg">
+                        {{submit.btn}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="workflow" class="bg-lux-dark py-24 pb-8 border-t border-white/5 relative overflow-x-hidden">
+        <div class="container mx-auto px-6">
+            <div class="mb-24 border-l border-lux-gold pl-8 md:pl-14">
+                <h2 class="text-2xl md:text-4xl font-serif text-white uppercase tracking-tighter italic">
+                    {{roadmap.title}}
+                </h2>
+                <p class="font-mono text-[9px] uppercase tracking-[0.5em] text-lux-silver mt-2">
+                    {{roadmap.sub}}
+                </p>
+            </div>
+
+            <div class="relative max-w-6xl mx-auto">
+                {{roadmap.html}}
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contacts" class="bg-lux-dark pt-24 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="mb-16 border-l border-lux-gold pl-8 md:pl-14">
+                <h2 class="text-2xl md:text-4xl font-serif text-white uppercase tracking-tighter italic">
+                    {{contacts.title}}
+                </h2>
+                <p class="font-mono text-[9px] uppercase tracking-[0.5em] text-lux-silver mt-2">
+                    {{contacts.sub}}
+                </p>
+            </div>
+        </div>
+
+        <section class="relative left-1/2 transform -translate-x-1/2 w-screen overflow-hidden border-t border-white/5">
+            <div class="relative w-full h-[800px] md:h-[600px] bg-[#111] overflow-hidden">
+                <iframe 
+                    src="{{contacts.mapLink}}" 
+                    style="border:0; filter: invert(0.9) hue-rotate(180deg) brightness(1.1) contrast(1.2) saturate(0.5);" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    class="w-full h-full grayscale opacity-80">
+                </iframe>
+            </div>
+            
+            <div class="absolute top-2 right-2 left-2 md:left-auto md:top-8 md:right-10 
+                        max-w-full md:w-[360px] 
+                        bg-white p-8 shadow-2xl transition-all duration-700">
+                                  
+                <div class="space-y-4">
+                    <p class="text-lux-dark text-sm md:text-base font-serif leading-relaxed tracking-tight">
+                        {{contacts.address}}
+                        <br>
+                        <span class="block mt-4 text-[10px] font-mono text-lux-dark/40 uppercase leading-normal tracking-widest normal-case italic">
+                            {{contacts.note}}
+                        </span>
+                    </p>
+                    <div class="h-px w-full bg-lux-dark/10"></div>
+                    <div class="mx-auto flex flex-wrap justify-center justify-items-center gap-2">
+                        {{contacts.contactlistHTML}}
+                    </div>
+                </div>
+
+                <div class="absolute bottom-2 right-4 font-mono text-[8px] text-lux-dark/20 uppercase tracking-tighter">
+                    LOC: 38.5447° N, 121.3344° W
+                </div>
+            </div>
+        </section>
+
+    </section>
+
+
+    <section id="ltform" class="py-24 pb-48 bg-lux-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="mb-16 border-l border-lux-gold pl-8 md:pl-14">
+                <h2 class="text-2xl md:text-4xl font-serif text-white uppercase tracking-tighter">{{submit.title}}</h2>
+                <p class="font-mono text-[9px] uppercase tracking-[0.5em] text-lux-silver mt-2">{{submit.sub}}</p>
+            </div>
+            <div class="mt-24 bg-white p-8 md:p-10 text-lux-dark max-w-5xl mx-auto ">
+               
+                <div class="space-y-6">
+                    <input data-name type="text" placeholder="NAME" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest">
+                    
+                    <input data-tel type="tel" placeholder="PHONE" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest">
+                    
+                    <textarea data-text placeholder="COMMENT / PROJECT DETAILS" rows="3" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest resize-none"></textarea>
+                    
+                    <button onclick="submit()" class="w-full bg-lux-dark text-white py-5 mt-4 font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-lux-gold transition-all duration-500 shadow-lg">
+                        {{submit.btn}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <footer class="bg-lux-dark border-t border-white/20 px-8 py-16">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="space-y-4">
+                <p class="font-mono text-[9px] uppercase tracking-[0.4em] text-lux-silver mb-6">Production</p>
+                <p class="text-sm font-serif opacity-80 leading-relaxed italic">{{contacts.address}}</p>
+            </div>
+            
+            <div class="flex flex-col items-center justify-center space-y-4">
+                <div class="flex justify-center">
+                    <button onclick="openProjectNode('drawer-partnership')" class="block px-8 py-4 border border-lux-gold/30 hover:border-lux-gold transition-all duration-700">
+                        <span class="relative z-10 font-serif text-xl md:text-2xl text-white italic tracking-tighter uppercase group-hover:text-lux-dark transition-colors duration-500">
+                            Партнерам
+                        </span>
+                        <div class="absolute inset-0 bg-lux-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></div>
+                    </button>
+                </div>
+                <!-- <img src="{{brand.logoUrl}}" alt="Logo" class="h-10 opacity-50 grayscale brightness-200"> -->
+                <p class="font-mono text-[8px] uppercase tracking-[0.4em] text-lux-silver">Engineering Furniture Factory</p>
+            </div>
+
+            <div class="md:text-right space-y-4">
+                <p class="font-mono text-[9px] uppercase tracking-[0.4em] text-lux-silver mb-6">Connect</p>
+                <a href="tel:{{contacts.phone}}" class="block text-lg font-mono hover:text-lux-gold transition-colors">{{contacts.phone}}</a>
+                <a href="mailto:{{contacts.email}}" class="block text-xs font-mono opacity-60 hover:opacity-100 transition-opacity tracking-widest uppercase">{{contacts.email}}</a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between items-center text-[8px] font-mono text-lux-silver/30 uppercase tracking-[0.5em] mt-11">
+            <p>© 2026 LUXUS MEBEL. ALL RIGHTS RESERVED.</p>
+            <p>Made for professionals only</p>
+        </div>
+    </footer>
+
+    {{partnership.drawerHtml}}
+
+<script>
+const siteConfig = {
+    brand: {
+        name: 'Люксус Мебель',
+        subName: 'Инженерное производство полного цикла',
+        logoUrl: 'photo_5312274375471993666_c.jpg', 
+    },
+    navigation: {
+        // Рендерим меню сразу в строку, чтобы не городить циклы в основном рендере
+        menuHtml: [
+            { l: 'Проекты', h: '#projects' },
+            { l: 'Аудит', h: '#form' },
+            { l: 'Этапы', h: '#workflow' },
+            { l: 'Контакты', h: '#contacts' }
+        ].map(i => `<a href="${i.h}" class="hover:text-lux-gold transition-colors">${i.l}</a>`).join(''),
+        background: 'IMG_4290.webp',
+        partnership: { label: '[ Partnership ]' }
+    },
+    hero: {
+        title: 'Безупречность начинается с узла',
+        description: 'Инженерное производство мебели для тех, кто не согласен на компромиссы. Создаем тактильный опыт, облеченный в идеальную форму.',
+        image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop', // Светлое интерьерное фото или макро детали
+        cta: 'Смотреть проекты'
+    },
+    partners: {
+        title: 'С кем мы создаем',
+        replic: 'какая то длинная реплика как мы относимся к материалам и качеству что мы хотим вип но ценим как ваше время так и бюджет и тралалала',
+        // Генерируем список логотипов сразу с классами Tailwind
+        listHtml: [
+            { n: 'Dornbracht', l: 'https://cdn.worldvectorlogo.com/logos/dornbracht-1.svg' },
+            { n: 'Blum', l: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Blum_logo.svg' },
+            { n: 'Hettich', l: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Hettich-Logo.svg' },
+            { n: 'Gaggenau', l: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Gaggenau_logo.svg' }
+        ].map(p => `
+            <div class="inline-block px-12 transition-all duration-500 grayscale opacity-40 hover:grayscale-0 hover:opacity-100">
+                <img src="${p.l}" alt="${p.n}" class="h-6 md:h-8 w-auto inline-block">
+            </div>
+        `).join('')
+    },
+    projects: {
+        title: 'Анатомия проектов',
+        promos: [
+            {
+                title: 'Скачать прайс-лист [PDF]',
+                link: '#'
+            },
+            {
+                title: 'Скачать оффер [PDF]',
+                link: '#'
+            },
+        ],
+        items: [
+            {
+                id: 'p1',
+                title: 'ЖК Først',
+                images: [
+                    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800', // Это станет превью
+                    'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1617103996702-96ff29b1c467?w=600&h=600&fit=crop'
+                ],
+                tags: ['Шпон дуба', 'Теневой профиль', 'Blum Legrabox', 'Интеграция света'],
+                desc: 'Интеграция скрытых систем хранения. Разработка узла примыкания мебели к теневому профилю без видимого зазора.'
+            },
+            {
+                id: 'p2',
+                title: 'Офис Мосгражданпроект',
+                images: [
+                    'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800',
+                    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&h=600&fit=crop'
+                ],
+                tags: ['Нано-пластик Fenix', 'Кабель-менеджмент', 'Hettich AvanTech'],
+                desc: 'Эргономичные рабочие станции. Скрытая разводка коммуникаций внутри силового каркаса столов.'
+            },
+            {
+                id: 'p3',
+                title: 'Ресторан Lumière',
+                images: [
+                    'https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1550976037-2300ee6c85b2?q=80&w=800',
+                ],
+                tags: ['Кварцит', 'Латунь', 'Скрытые люки', 'ЧПУ-фрезеровка'],
+                desc: 'Барная стойка из массива камня. Реализация невидимых ревизионных люков для доступа к коммуникациям.'
+            },
+            {
+                id: 'p4',
+                title: 'ЖК Først',
+                images: [
+                    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800', // Это станет превью
+                    'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1617103996702-96ff29b1c467?w=600&h=600&fit=crop'
+                ],
+                tags: ['Шпон дуба', 'Теневой профиль', 'Blum Legrabox', 'Интеграция света'],
+                desc: 'Интеграция скрытых систем хранения. Разработка узла примыкания мебели к теневому профилю без видимого зазора.'
+            },
+            {
+                id: 'p5',
+                title: 'Офис Мосгражданпроект',
+                images: [
+                    'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800',
+                    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&h=600&fit=crop'
+                ],
+                tags: ['Нано-пластик Fenix', 'Кабель-менеджмент', 'Hettich AvanTech'],
+                desc: 'Эргономичные рабочие станции. Скрытая разводка коммуникаций внутри силового каркаса столов.'
+            },
+            {
+                id: 'p6',
+                title: 'Ресторан Lumière',
+                images: [
+                    'https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1550976037-2300ee6c85b2?q=80&w=800',
+                ],
+                tags: ['Кварцит', 'Латунь', 'Скрытые люки', 'ЧПУ-фрезеровка'],
+                desc: 'Барная стойка из массива камня. Реализация невидимых ревизионных люков для доступа к коммуникациям.'
+            },
+            {
+                id: 'p7',
+                title: 'ЖК Først',
+                images: [
+                    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800', // Это станет превью
+                    'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1617103996702-96ff29b1c467?w=600&h=600&fit=crop'
+                ],
+                tags: ['Шпон дуба', 'Теневой профиль', 'Blum Legrabox', 'Интеграция света'],
+                desc: 'Интеграция скрытых систем хранения. Разработка узла примыкания мебели к теневому профилю без видимого зазора.'
+            },
+            {
+                id: 'p8',
+                title: 'Офис Мосгражданпроект',
+                images: [
+                    'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800',
+                    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&h=600&fit=crop'
+                ],
+                tags: ['Нано-пластик Fenix', 'Кабель-менеджмент', 'Hettich AvanTech'],
+                desc: 'Эргономичные рабочие станции. Скрытая разводка коммуникаций внутри силового каркаса столов.'
+            },
+            {
+                id: 'p9',
+                title: 'Ресторан Lumière',
+                images: [
+                    'https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1550976037-2300ee6c85b2?q=80&w=800',
+                ],
+                tags: ['Кварцит', 'Латунь', 'Скрытые люки', 'ЧПУ-фрезеровка'],
+                desc: 'Барная стойка из массива камня. Реализация невидимых ревизионных люков для доступа к коммуникациям.'
+            },
+            {
+                id: 'p10',
+                title: 'ЖК Først',
+                images: [
+                    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800', // Это станет превью
+                    'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1617103996702-96ff29b1c467?w=600&h=600&fit=crop'
+                ],
+                tags: ['Шпон дуба', 'Теневой профиль', 'Blum Legrabox', 'Интеграция света'],
+                desc: 'Интеграция скрытых систем хранения. Разработка узла примыкания мебели к теневому профилю без видимого зазора.'
+            },
+        ],
+
+        // Геттер для сетки (Preview = images[0])
+        get gridHtml() {
+            return this.items.map((p,i) => `
+                <div id="project-${p.id}" class="break-inside-avoid mb-1.5 group cursor-pointer">
+                    <div onclick="openProjectNode('project-${p.id}')" 
+                        class="relative overflow-hidden rounded-[16px] bg-[#1A1A1A] aspect-${['[2/3]','[3/5]','[3/4]'][(i+1)%3]}"> 
+                        
+                        <img src="${p.images[0]}" class="w-full h-full block object-cover">
+
+                        ${[...p.images,...p.images].slice(1).map((img, index) => `
+                            <img src="${img}" 
+                                class="absolute inset-0 w-full h-full object-cover opacity-0 
+                                        transition-opacity duration-[1500ms] ease-in-out
+                                        group-hover:opacity-100 
+                                        group-hover:delay-[${index * 1600}ms] 
+                                        z-[${index + 1}]">
+                        `).join('')}
+
+                        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    </div>
+                    
+                    <div class="mt-1 px-1">
+                        <h3 class="text-[13px] font-sans font-semibold text-white/90 tracking-tight">${p.title}</h3>
+                        <p class="text-[7px] font-mono text-lux-silver uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            Explore Anatomy
+                        </p>
+                    </div>
+
+                    <div onclick="closeProjectNode('project-${p.id}')" 
+                        class="node-backdrop fixed inset-0 z-[100] hidden backdrop-blur-md bg-black/40 opacity-0 transition-opacity duration-500 cursor-default">
+                    </div>
+
+                    <div class="node-panel fixed inset-y-0 right-0 z-[110] w-full md:w-[40%] bg-[#0D0D0D] border-l border-white/10 translate-x-full transition-transform duration-700 ease-in-out overflow-y-auto no-scrollbar">
+                        <div class="p-8 md:p-12 min-h-full flex flex-col">
+                            <button onclick="closeProjectNode('project-${p.id}')" class="self-start mb-10 font-mono text-[9px] uppercase tracking-[0.4em] text-lux-silver hover:text-white transition-colors">
+                                [ Close ]
+                            </button>
+
+                            <div class="flex space-x-4 overflow-x-auto overflow-y-hidden pb-10 no-scrollbar snap-x">
+                                ${p.images.map(img => `
+                                    <div class="w-64 h-64 md:w-80 md:h-80 flex-shrink-0 bg-cover bg-center border border-white/5 snap-center" style="background-image: url('${img}')"></div>
+                                `).join('')}
+                            </div>
+
+                            <div class="max-w-xl">
+                                <h3 class="text-2xl font-serif text-white mb-6 italic tracking-wide">${p.title}</h3>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    ${(p.tags || []).map(tag => `
+                                        <span class="text-[8px] font-mono border border-white/10 px-4 py-2 text-lux-silver uppercase tracking-[0.2em] bg-white/[0.03]">
+                                            ${tag}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                                <div class="h-px w-8 bg-lux-gold/40 mb-6"></div>
+                                <p class="text-lux-silver font-mono text-[12px] md:text-sm leading-relaxed mb-8 opacity-90 text-justify">
+                                    ${p.desc || 'Инженерное решение, разработанное с учетом тактильных характеристик материалов и жестких допусков примыкания. Каждая деталь прошла этап цифрового моделирования перед запуском в производство.'}
+                                </p>
+                            </div>
+
+                            <div class="flex flex-wrap items-center justify-start gap-2 mt-11 mb-2">
+                                ${this.promos.map(promo=>`
+                                    <a href="${promo.link}" class="px-7 py-3 border border-white/10 font-mono text-[9px] uppercase tracking-widest bg-white/90 text-lux-dark hover:bg-white transition-all text-center">
+                                        ${promo.title}
+                                    </a>
+                                `).join('\n')}
+                            </div>
+
+                            <div class="mt-auto bg-white p-8 md:p-10 text-lux-dark">
+                                <p class="font-mono text-[9px] uppercase tracking-[0.5em] mb-10 opacity-40 font-bold">Engineering Audit Request</p>
+                                
+                                <div class="space-y-6">
+                                    <input data-name type="text" placeholder="NAME" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest">
+                                    <input data-tel type="tel" placeholder="PHONE" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest">
+                                    <textarea data-text placeholder="COMMENT / PROJECT DETAILS" rows="3" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest resize-none"></textarea>
+                                    <button onclick="submit('from-${p.title}')" class="w-full bg-lux-dark text-white py-5 mt-4 font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-lux-gold transition-all duration-500 shadow-lg">
+                                        {{submit.btn}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            `).join('');
+        }
+    },
+    submit: {
+        title: 'Отправьте проект на аудит',
+        sub: 'Для VIP-клиентов и дизайн-бюро. Разбор технической реализации за 24 часа.',
+        btn: 'submit'
+    },
+
+    roadmap: {
+        title: 'Этапы реализации',
+        sub: 'Workflow / От идеи до монтажа',
+        steps: [
+            { id: '01', title: 'Техническое задание', desc: 'Обсуждаем идею, выбираем материалы и фиксируем ключевые узлы примыкания. Формируем бюджет и сроки.' },
+            { id: '02', title: 'Проектирование', desc: 'Создаем цифровую модель и детальные чертежи каждой детали в CAD-системах для ЧПУ-станков.' },
+            { id: '03', title: 'Производство', desc: 'Раскрой, фрезеровка и ручная доводка поверхностей мастерами. Контроль качества на каждом этапе.' },
+            { id: '04', title: 'Контрольная сборка', desc: 'Полная проверка допусков и работы фурнитуры в цеху перед финишной отделкой и упаковкой.' },
+            { id: '05', title: 'Монтаж', desc: 'Чистая установка изделия на объекте с ювелирной подгонкой по месту и финальной полировкой.' }
+        ],
+        get html() {
+            return this.steps.map((s, index) => {
+                const isEven = index % 2 === 0;
+                return `
+                <div class="relative w-full flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center mb-12 md:mb-0 group">
+                    
+                    <div class="absolute left-1/2 md:top-0 top-1/2 -translate-x-1/2 w-px h-full bg-white/20 group-hover:bg-lux-gold/40 transition-colors duration-700"></div>
+
+                    <div class="w-1/2"></div>
+
+                    <div class="w-full md:w-1/2 p-4 md:p-6 z-10" data-aos="${isEven ? 'fade-right' : 'fade-left'}" data-aos-delay="${index * 100}" >
+                        <div class="bg-white/[0.05] border border-white/10 p-6 rounded-2xl backdrop-blur-md 
+                                    transition-all duration-700 hover:bg-white/[0.08] hover:border-lux-gold/30 
+                                    hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform group-hover:-translate-y-1">
+                            
+                            <div class="flex items-center space-x-4 mb-4 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse md:space-x-reverse text-right'}">
+                                <span class="text-2xl italic text-lux-gold opacity-50 group-hover:opacity-100 transition-opacity">${s.id}</span>
+                                <h3 class="text-xl font-serif text-white italic tracking-wide">${s.title}</h3>
+                            </div>
+
+                            <p class="text-lux-silver font-mono text-[14px] md:text-[16px] leading-relaxed opacity-80 group-hover:opacity-100 ${!isEven ? 'md:text-right' : ''}">
+                                ${s.desc}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-lux-gold shadow-[0_0_15px_rgba(212,175,55,0.6)] z-20 hidden md:block group-hover:scale-150 transition-transform"></div>
+                </div>
+            `}).join('');
+        }
+    },
+
+    contacts: {
+        title: 'Локация и связь',
+        sub: 'Engineering HQ / Production Service',
+        address: '3909 Bradshaw Rd, Sacramento, CA, 95827 US',
+        mapLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d577337.033195561!2d36.72592314387118!3d55.58072976952611!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54afc73d4b0c9%3A0x3d44d6cc5757cf4c!2z0JzQvtGB0LrQstCwLCDQoNC-0YHRgdC40Y8!5e0!3m2!1sru!2sbg!4v1774346982913!5m2!1sru!2sbg', // Твой Iframe src
+        note: 'Safetyville hosts group games. Private games are available at any location convenient for you.',
+        phone: '+891012345678',
+        email: 'info@luxus.me',
+        contactlist: [
+            {name: 'phone', href: '123'},
+            {name: 'telegram', href: '123'},
+            {name: 'whatsap', href: '123'},
+            {name: 'vk', href: '123'},
+        ],
+        get contactlistHTML() {
+            return this.contactlist.map(contact=>`<a href="${contact.href}" class="text-[8px] font-mono border border-black/20 p-2 px-3 text-black uppercase tracking-[0.2em]">${contact.name}</a>`).join('\n')
+        }
+    },
+
+    partnership: {
+        title: 'Партнерская программа 360°',
+        sub: 'Для архитекторов и дизайн-бюро',
+        promos: [
+            {
+                title: 'Скачать прайс-лист [PDF]',
+                link: '#'
+            },
+            {
+                title: 'Скачать оффер [PDF]',
+                link: '#'
+            },
+        ],
+        points: [
+            { h: 'Производство в Подмосковье', t: 'Собственный цех 1200м². Контроль качества на каждом этапе без посредников.' },
+            { h: 'VIP-сервис', t: 'Работаем с материалами любой сложности: массив, латунь, жидкий металл, Fenix.' },
+            { h: 'Мобильность', t: 'Выезд инженера-замерщика с образцами материалов в течение 24 часов.' },
+            { h: 'Реферальная ссылка', t: 'Можно отправить сайт клиенту. Мы даем вам личную ссылку.' },
+            { h: 'Защита проекта', t: 'Клиент закрепляется за вами в CRM. Гарантия выплаты комиссионных точно в срок.' }
+        ],
+        get drawerHtml() {
+            return `
+            <div id="drawer-partnership" class="project-node">
+                <div onclick="closeProjectNode('drawer-partnership')" 
+                    class="node-backdrop fixed inset-0 z-[100] hidden backdrop-blur-md bg-black/60 opacity-0 transition-opacity duration-500">
+                </div>
+                <div class="node-panel fixed inset-y-0 right-0 z-[110] w-full md:w-[45%] bg-[#0D0D0D] border-l border-white/10 translate-x-full transition-transform duration-700 ease-in-out overflow-y-auto no-scrollbar">
+                    <div class="p-8 md:p-16 min-h-full flex flex-col">
+                        <button onclick="closeProjectNode('drawer-partnership')" class="self-start mb-12 font-mono text-[9px] uppercase tracking-[0.4em] text-lux-silver hover:text-white transition-colors">
+                            [ Close ]
+                        </button>
+
+                        <h2 class="text-3xl font-serif italic text-white mb-4 italic tracking-tight">${this.title}</h2>
+                        <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-lux-gold mb-12">${this.sub}</p>
+
+                        <div class="space-y-10 mb-16">
+                            ${this.points.map(p => `
+                                <div class="border-l border-lux-gold/30 pl-6">
+                                    <h4 class="text-white font-serif text-lg mb-2 italic">${p.h}</h4>
+                                    <p class="text-lux-silver font-mono text-xs leading-relaxed opacity-70">${p.t}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+                            ${this.promos.map(promo=>`
+                                <a href="${promo.link}" class="px-5 py-3 border border-white/10 py-6 font-mono text-[9px] uppercase tracking-widest hover:bg-white/5 transition-all text-center">
+                                    ${promo.title}
+                                </a>
+                            `).join('\n')}
+                        </div>
+
+                        <div class="mt-auto bg-white p-8 md:p-10 text-lux-dark">
+                            <p class="font-mono text-[9px] uppercase tracking-[0.5em] mb-10 opacity-40 font-bold">Заявка на партнерство</p>
+                            <div class="space-y-6">
+                                <input data-p-name type="text" placeholder="ВАШЕ ИМЯ / СТУДИЯ" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest">
+                                <input data-p-tel type="tel" placeholder="ТЕЛЕФОН" class="w-full border-b border-lux-dark/10 py-3 focus:outline-none focus:border-lux-gold font-mono text-[11px] bg-transparent uppercase tracking-widest">
+                                <button onclick="submit('PARTNERSHIP_REQUEST')" class="w-full bg-lux-dark text-white py-5 mt-4 font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-lux-gold transition-all duration-500 shadow-lg">
+                                    Стать партнером
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+    }
+    
+};
+
+const renderTMP = document.body.innerHTML;
+function render(data) {
+    let html = renderTMP;
+    let refuse = 50;
+    while(/\{\{(.*?)\}\}/g.exec(html) !== null && !!refuse) {
+        html = html.replace(/\{\{(.*?)\}\}/g, (m, key) => 
+            key.trim().split('.').reduce((acc, part) => acc && acc[part], data) || `[${key}]`
+        );
+        refuse--;
+    }
+    document.body.innerHTML = html;
+    AOS.init({
+      duration: 1000, // Скорость анимации (1 сек)
+      once: true,     // Анимировать только один раз при первом скролле
+      offset: 50,    // Начинать анимацию за 50px до появления блока
+    });
+}
+render(siteConfig);
+
+function openProjectNode(id) {
+    const node = document.getElementById(id);
+    const backdrop = node.querySelector('.node-backdrop');
+    const panel = node.querySelector('.node-panel');
+
+    // 1. Показываем подложку
+    backdrop.classList.remove('hidden');
+    setTimeout(() => {
+        backdrop.classList.add('opacity-100');
+        // 2. Выдвигаем панель
+        panel.classList.remove('translate-x-full');
+    }, 10);
+
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProjectNode(id) {
+    const node = document.getElementById(id);
+    const backdrop = node.querySelector('.node-backdrop');
+    const panel = node.querySelector('.node-panel');
+
+    // 1. Задвигаем панель
+    panel.classList.add('translate-x-full');
+    // 2. Скрываем подложку
+    backdrop.classList.remove('opacity-100');
+
+    setTimeout(() => {
+        backdrop.classList.add('hidden');
+        document.body.style.overflow = '';
+    }, 500);
+}
+
+function submit(meta) {
+    const getData = (tag) =>[...document.querySelectorAll(tag)].map(el=>el.value).filter(d=>!!d).join(' | ')
+    const res = {
+        meta,
+        partnerID: window.localStorage.getItem('pid'),
+        name: getData('[data-name]'),
+        tel: getData('[data-tel]'),
+        text: getData('[data-text]'),
+    }
+    alert(JSON.stringify(res));
+}
+window.localStorage.setItem('pid', new URLSearchParams(window.location.href.split('?')[1] || '').get('pid') || 'none');
+
+
+</script>
+</body>
+</html>
